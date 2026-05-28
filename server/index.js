@@ -20,7 +20,7 @@ app.use(
 const PORT = process.env.PORT || 6000;
 
 app.get("/", (req, res) => {
-  res.send("Chat App API Running ");
+  res.send("Chat App  Testing API Running ");
 });
 
 app.listen(PORT, () => {
