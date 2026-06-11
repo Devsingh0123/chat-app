@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import connectDB from "./config/db.js";
+import messageRouter from "./routes/message.routes.js";
+import authRouter from "./routes/auth.routes.js";
 
 dotenv.config();
 connectDB();
@@ -23,6 +25,8 @@ app.get("/", (req, res) => {
   res.send("Chat App  Testing API Running ");
 });
 
+app.use("/auth",authRouter)
+app.use("/messages",messageRouter)
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
