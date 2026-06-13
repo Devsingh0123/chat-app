@@ -14,9 +14,11 @@ const app = express();
 // middlewares
 app.use(express.json());
 app.use(cookieParser());
-
 app.use(
-  cors()
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true, // cookie ke liye MUST
+  })
 );
 
 const PORT = process.env.PORT || 6000;

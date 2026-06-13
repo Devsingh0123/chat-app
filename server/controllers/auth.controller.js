@@ -88,3 +88,40 @@ export const logout = async (req, res) => {
 
   res.json({ success: true, message: "Logged out" });
 };
+
+// get me 
+export const getMe = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      user,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+// get all users except me
+export const getAllusers = async (req, res)=>{
+ try {
+    const users = await User.find({
+      _id: { $ne: req.user._id },
+    }).select("-password");
+
+    res.json({ success: true, users });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+
+}
