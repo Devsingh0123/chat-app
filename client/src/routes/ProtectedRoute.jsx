@@ -8,7 +8,7 @@ const ProtectedRoute = ({ children }) => {
    if (isLoading) {
     return <div>Loading...</div>; // 👈 wait for /me
   }
-  console.log(isAuthenticated)
+
 
 
   if (!isAuthenticated) {

@@ -40,11 +40,14 @@ export const logout = createAsyncThunk(
   },
 );
 
+//current user
 export const fetchCurrentUser = createAsyncThunk(
   "auth/me",
   async (_, { rejectWithValue }) => {
     try {
       const res = await api.get("/auth/me");
+
+    
       return res.data.user;
     } catch (err) {
       return rejectWithValue(err.response.data.message);
@@ -55,7 +58,7 @@ export const fetchCurrentUser = createAsyncThunk(
 const initialState = {
   user: null,
   isAuthenticated: false,
-  isLoading: false,
+  isLoading: true,
   error: null,
 };
 

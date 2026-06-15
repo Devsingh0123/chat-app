@@ -24,3 +24,31 @@ export const sendMessage = async (req, res) => {
     });
   }
 };
+
+
+
+
+// GET CHAT MESSAGES BETWEEN TWO USERS
+export const getMessages = async (req, res) => {
+  try {
+    const receiverId = req.params.id; // selected user
+    const senderId = req.user._id;    // logged in user
+
+    const messages = await Message.find({
+      $or: [
+        { senderId, receiverId },
+        { senderId: receiverId, receiverId: senderId },
+      ],
+    }).sort({ createdAt: 1 }); // old → new order
+
+    res.status(200).json({
+      success: true,
+      messages,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};

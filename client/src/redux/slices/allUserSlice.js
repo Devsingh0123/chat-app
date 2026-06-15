@@ -8,7 +8,7 @@ export const fetchAllUsers = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const res = await api.get("/auth/allusers");
-      console.log(res)
+
       return res.data.users;
     } catch (err) {
       return rejectWithValue(err.response.data.message);
